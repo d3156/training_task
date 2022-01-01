@@ -12,19 +12,19 @@ fn main() {
     std::io::stdin().lock().read_line(&mut out_file).unwrap();
     std::thread::spawn(move || {
         loop{
-            input_thread::input_step(&inp_file);
+            input_thread::input_step(&inp_file.trim());
         }
     });
     std::thread::spawn(move || {
         loop{
-            output_thread::output_step(&out_file);
+            output_thread::output_step(&out_file.trim());
         }
     });
     loop
     {
-        match File::open("X")
+        match File::open("X.txt")
         {
-            Ok(_file) => (),
+            Ok(_file) => break,
             Err(err) => match err.kind() {
                 ErrorKind::NotFound => continue,
                 _ => break,
