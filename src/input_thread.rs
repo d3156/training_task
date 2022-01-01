@@ -1,10 +1,10 @@
-
-use std::{time, io, fs};
-
-pub fn input_step(s : &String) -> io::Result<()>
+use std::{path::Path, time, fs};
+pub fn input_step(path : &String)
 {
-    let msg = fs::read_to_string(s)?;
-    println!("{}", msg);
+    match fs::read_to_string(Path::new(path))
+    {
+        Ok(msg) => println!("{}", msg),
+        _ => return,
+    }
     std::thread::sleep(time::Duration::from_millis(500));
-    Ok(())
 }

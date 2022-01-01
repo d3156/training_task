@@ -3,6 +3,5 @@ name = "training_task"
 version = "0.1.0"
 edition = "2021"
 autors = ["Yaroslav Smirnov <d3156@mail.ru>"]
-# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
-
 [dependencies]
+chrono = "0.4.0"

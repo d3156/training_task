@@ -12,14 +12,12 @@ fn main() {
     std::io::stdin().lock().read_line(&mut out_file).unwrap();
     std::thread::spawn(move || {
         loop{
-            match input_thread::input_step(&inp_file) { _ =>(), };
-            //Дописать обработку ошибок чтения файла и и других ошибок
+            input_thread::input_step(&inp_file);
         }
     });
     std::thread::spawn(move || {
         loop{
-            match output_thread::output_step(&out_file) { _ =>(), };
-            //Дописать обработку ошибок чтения файла и и других ошибок
+            output_thread::output_step(&out_file);
         }
     });
     loop

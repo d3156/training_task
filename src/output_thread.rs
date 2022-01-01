@@ -1,15 +1,23 @@
-use std::{io::BufRead, io, fs};
-pub fn output_step(s: &String) -> io::Result<()>
+use crate::output_thread::io::stdin;
+use std::{ path::Path, io::{BufRead, Write}, io, fs};
+use chrono;
+pub fn output_step(path: &String)
 {
     let mut msg = String::new();
-    std::io::stdin().lock().read_line(&mut msg)?;
+    if stdin().lock().read_line(&mut msg).is_err() {return;}
+    
     loop
     {
-        match fs::write(&s, &msg)
+        match fs::File::create(Path::new(path))
         {
-            Ok(_var) => break,
-            Err(_err) => continue,
+            Ok(mut f) => {
+                match write!(f, "{} [{}]", msg, chrono::Local::now())
+                {
+                    Ok(_var) => break,
+                    Err(err) => { println!("{}", err); continue;  },
+                };
+            },
+            Err(err) => {  println!("{}", err); continue; },
         };
     }
-    Ok(())
 }
