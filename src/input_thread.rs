@@ -16,7 +16,7 @@ use std::{time, fs};
 pub fn input_step(path : &str)
 {
     if fs::File::open(path).is_ok() {
-        std::thread::sleep(time::Duration::from_millis(100));
+        std::thread::sleep(time::Duration::from_millis(25));
         match fs::read_to_string(path)
         {
             Ok(msg) => println!("{}", msg),
